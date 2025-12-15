@@ -9,9 +9,9 @@ export class AuthService {
 
   private apiGateway = 'http://localhost:8765/user-service/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-   login(data: any) {
+  login(data: any) {
     return this.http.post<{ token: string }>(
       `${this.apiGateway}/login`,
       data
@@ -25,12 +25,12 @@ export class AuthService {
   }
 
   register(data: any) {
-  return this.http.post(
-    `${this.apiGateway}/register`,
-    data,
-    { responseType: 'text' }
-  );
-}
+    return this.http.post(
+      `${this.apiGateway}/register`,
+      data,
+      { responseType: 'text' }
+    );
+  }
 
   logout() {
     const token = localStorage.getItem('token');
