@@ -17,45 +17,45 @@ export class SearchFlights {
   flights: any[] = [];
   message = '';
 
-  constructor(private flightService: FlightService) {}
+  constructor(private flightService: FlightService) { }
 
   search() {
-  if (!this.from && !this.to && !this.airline) {
-    this.message = 'All fields are required';
-    this.flights = [];
-    return;
-  }
-  if (!this.from || !this.to) {
-    this.message = 'From and To locations are required';
-    this.flights = [];
-    return;
-  }
+    if (!this.from && !this.to && !this.airline) {
+      this.message = 'All fields are required';
+      this.flights = [];
+      return;
+    }
+    if (!this.from || !this.to) {
+      this.message = 'From and To locations are required';
+      this.flights = [];
+      return;
+    }
 
-  if (!this.airline) {
-    this.message = 'Airline name is required';
-    this.flights = [];
-    return;
-  }
+    if (!this.airline) {
+      this.message = 'Airline name is required';
+      this.flights = [];
+      return;
+    }
 
-  this.flightService.search(this.from, this.to, this.airline)
-    .subscribe({
-      next: (data: any[]) => {
-        this.flights = data;
+    this.flightService.search(this.from, this.to, this.airline)
+      .subscribe({
+        next: (data: any[]) => {
+          this.flights = data;
 
-        if (this.flights.length === 0) {
-          this.message = 'No flights available';
-        } else {
-          this.message = '';
+          if (this.flights.length === 0) {
+            this.message = 'No flights available';
+          } else {
+            this.message = '';
+          }
+        },
+        error: () => {
+          this.flights = [];
+          this.message = 'Error fetching flights';
         }
-      },
-      error: () => {
-        this.flights = [];
-        this.message = 'Error fetching flights';
-      }
-    });
-}
+      });
+  }
 
-getDuration(departure: string, arrival: string): string {
+  getDuration(departure: string, arrival: string): string {
     const dep = new Date(departure);
     const arr = new Date(arrival);
 
