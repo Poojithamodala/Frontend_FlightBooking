@@ -1,5 +1,3 @@
-
-
 .register-container {
   width: 400px;
   max-width: 90%;
@@ -23,7 +21,8 @@ form {
   gap: 15px;
 }
 
-input, select {
+input,
+select {
   padding: 10px 12px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -32,7 +31,8 @@ input, select {
   transition: border 0.2s, box-shadow 0.2s;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
   border-color: #007BFF;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
@@ -52,7 +52,7 @@ button:hover {
   background-color: #0056b3;
 }
 
- .msg {
+.msg {
   text-align: center;
   font-size: 14px;
   margin-top: 1rem;
@@ -63,9 +63,9 @@ button:hover {
   color: #b00020;
 }
 
- .msg.success {
+.msg.success {
   color: #2e7d32;
-} 
+}
 
 .switch {
   text-align: center;
@@ -83,11 +83,10 @@ button:hover {
 }
 
 select option[value=""] {
-  color: #aaa;          
-  font-style: italic;   
+  color: #aaa;
+  font-style: italic;
 }
 
 select {
-  color: #555;         
+  color: #555;
 }
- 
