@@ -15,7 +15,7 @@ export class Login {
   message = '';
   loading = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   login() {
     this.message = '';
