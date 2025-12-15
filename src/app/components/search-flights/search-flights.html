@@ -1,0 +1,53 @@
+<div class="search-box">
+  <h2>Search Flights</h2>
+
+  <div class="form">
+    <input
+      type="text"
+      placeholder="From"
+      [(ngModel)]="from"
+      name="from"
+    />
+
+    <input
+      type="text"
+      placeholder="To"
+      [(ngModel)]="to"
+      name="to"
+    />
+
+    <input
+      type="text"
+      placeholder="Airline Name"
+      [(ngModel)]="airline"
+      name="airline"
+    />
+
+    <button (click)="search()">Search</button>
+  </div>
+
+  <p class="msg">{{ message }}</p>
+
+  <table *ngIf="flights.length > 0">
+    <tr>
+    <th>Airline</th>
+    <th>Airports</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Duration</th>
+    <th>Price (₹)</th>
+  </tr>
+
+    <tr *ngFor="let f of flights">
+      <td>{{ f.airline }}</td>
+    <td>{{ f.fromPlace }} → {{ f.toPlace }}</td>
+    <td>{{ f.departureTime | date:'dd MMM yyyy' }}</td>
+    <td>
+      {{ f.departureTime | date:'HH:mm' }} -
+      {{ f.arrivalTime | date:'HH:mm' }}
+    </td>
+    <td>{{ getDuration(f.departureTime, f.arrivalTime) }}</td>
+    <td>₹ {{ f.price }}</td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,56 @@
+.landing {
+  height: calc(100vh - 64px);
+  background: linear-gradient(135deg, #1976d2, #64b5f6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.landing h1 {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.landing p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.primary {
+  background: #fff;
+  color: #1976d2;
+  border: none;
+}
+
+.primary:hover {
+  background: #f2f2f2;
+}
+
+.outline {
+  border: 2px solid #fff;
+  color: #fff;
+  background: transparent;
+}
+
+.outline:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

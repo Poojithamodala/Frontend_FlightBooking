@@ -1,0 +1,14 @@
+
+<nav class="navbar">
+  <div class="logo">✈️ Flight Booking</div>
+
+  <div class="links">
+    <a routerLink="/">Home</a>
+
+    <a routerLink="/login" *ngIf="!isLoggedIn()">Login</a>
+    <a routerLink="/register" *ngIf="!isLoggedIn()">Register</a>
+
+    <a routerLink="/search" *ngIf="isLoggedIn()">Search Flights</a>
+    <a (click)="logout()" *ngIf="isLoggedIn()">Logout</a>
+  </div>
+</nav>

@@ -1,0 +1,93 @@
+
+
+.register-container {
+  width: 400px;
+  max-width: 90%;
+  margin: 50px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.register-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, select {
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+ .msg {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.msg.error {
+  color: #b00020;
+}
+
+ .msg.success {
+  color: #2e7d32;
+} 
+
+.switch {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.switch a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.switch a:hover {
+  text-decoration: underline;
+}
+
+select option[value=""] {
+  color: #aaa;          
+  font-style: italic;   
+}
+
+select {
+  color: #555;         
+}
+ 

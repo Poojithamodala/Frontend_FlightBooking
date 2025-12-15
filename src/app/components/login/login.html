@@ -1,0 +1,38 @@
+
+<div class="login-container">
+  <h2>Login</h2>
+
+  <form (ngSubmit)="login()">
+
+    <input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="credentials.email"
+      name="email"
+      required
+    />
+
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="credentials.password"
+      name="password"
+      required
+      minlength="6"
+    />
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Logging in...' : 'Login' }}
+    </button>
+  </form>
+
+  <p *ngIf="message"
+     class="msg error">
+    {{ message }}
+  </p>
+
+  <p class="switch">
+    Don’t have an account?
+    <a routerLink="/register">Register here</a>
+  </p>
+</div>
