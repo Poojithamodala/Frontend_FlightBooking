@@ -10,4 +10,4 @@ import { BrowserModule } from '@angular/platform-browser';
     FormsModule
   ]
 })
-export class AppModule {}
+export class AppModule { }
