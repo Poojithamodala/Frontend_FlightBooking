@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-register',
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './register.html',
-  styleUrls: ['./register.css'],  
+  styleUrls: ['./register.css'],
 })
 export class Register {
   user = {
@@ -22,7 +22,7 @@ export class Register {
   message = '';
   success = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   register() {
     console.log('Register method triggered');
@@ -39,14 +39,14 @@ export class Register {
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(e)) {
+    if (!emailRegex.test(e)) {
       this.message = 'Enter a valid email address';
       return;
     }
 
     if (u.length < 3) {
-    this.message = 'Username must be at least 3 characters';
-    return;
+      this.message = 'Username must be at least 3 characters';
+      return;
     }
 
     if (p.length < 6) {
@@ -56,8 +56,8 @@ export class Register {
     }
 
     if (age <= 0 || age > 120) {
-    this.message = 'Enter a valid age';
-    return;
+      this.message = 'Enter a valid age';
+      return;
     }
 
     this.authService.register(this.user).subscribe({
@@ -67,8 +67,8 @@ export class Register {
         setTimeout(() => this.router.navigate(['login']), 1500);
       },
       error: (err) => {
-      this.message = err?.error || 'Email already exists';
-    }
+        this.message = err?.error || 'Email already exists';
+      }
     });
   }
 }
