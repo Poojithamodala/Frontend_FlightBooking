@@ -8,16 +8,16 @@ export class FlightService {
 
   private apiUrl = 'http://localhost:8765/flight-service/api/flight';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   search(from: string, to: string, airline: string) {
-  return this.http.post<any[]>(
-    `${this.apiUrl}/search/airline`,
-    {
-      fromPlace: from,
-      toPlace: to,
-      airline: airline
-    }
-  );
-}
+    return this.http.post<any[]>(
+      `${this.apiUrl}/search/airline`,
+      {
+        fromPlace: from,
+        toPlace: to,
+        airline: airline
+      }
+    );
+  }
 }
