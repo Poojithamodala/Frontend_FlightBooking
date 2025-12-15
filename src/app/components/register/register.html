@@ -3,39 +3,13 @@
 
   <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
 
-    <input
-      type="text"
-      placeholder="Username"
-      [(ngModel)]="user.username"
-      name="username"
-      required
-    />
+    <input type="text" placeholder="Username" [(ngModel)]="user.username" name="username" required />
 
-    <input
-      type="email"
-      placeholder="Email"
-      [(ngModel)]="user.email"
-      name="email"
-      required
-    />
+    <input type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required />
 
-    <input
-      type="password"
-      placeholder="Password"
-      [(ngModel)]="user.password"
-      name="password"
-      required
-      minlength="6"
-    />
+    <input type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required minlength="6" />
 
-    <input
-      type="number"
-      placeholder="Age"
-      [(ngModel)]="user.age"
-      name="age"
-      required
-      min="1"
-    />
+    <input type="number" placeholder="Age" [(ngModel)]="user.age" name="age" required min="1" />
 
     <select [(ngModel)]="user.gender" name="gender" required>
       <option value="" disabled selected hidden>Select Gender</option>
@@ -52,10 +26,7 @@
     <button type="submit">Register</button>
   </form>
 
-  <p *ngIf="message"
-     class="msg"
-     [class.success]="success"
-     [class.error]="!success">
+  <p *ngIf="message" class="msg" [class.success]="success" [class.error]="!success">
     {{ message }}
   </p>
 
@@ -64,4 +35,3 @@
     <a routerLink="login">Login here</a>
   </p>
 </div>
-
