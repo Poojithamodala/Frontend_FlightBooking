@@ -21,10 +21,10 @@ export class App {
     });
   }
   goToLogin() {
-  this.router.navigate(['/login']);
-}
+    this.router.navigate(['/login']);
+  }
 
-goToRegister() {
-  this.router.navigate(['/register']);
-}
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
 }
