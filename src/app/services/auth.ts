@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -40,12 +41,20 @@ export class AuthService {
       {},
       {
         headers: token
-          ? { Authorization: `Bearer ${token}` }
-          : {}
+          ? { Authorization: `Bearer ${token}` } : {},
+          responseType: 'text'
       }
     ).pipe(
       tap(() => localStorage.removeItem('token'))
     );
+  }
+
+  getProfile() {
+    const token = localStorage.getItem('token');
+
+    return this.http.get<User>(`${this.apiGateway}/profile`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {}
+    });
   }
 
   isLoggedIn(): boolean {
