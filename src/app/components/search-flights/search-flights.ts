@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FlightService } from '../../services/flight';
+import { AuthService } from '../../services/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-flights',
@@ -17,23 +19,27 @@ export class SearchFlights {
   flights: any[] = [];
   message = '';
 
-  constructor(private flightService: FlightService) { }
+  constructor(private flightService: FlightService, private authService: AuthService,
+     private router: Router, private cdr: ChangeDetectorRef) { }
 
   search() {
     if (!this.from && !this.to && !this.airline) {
       this.message = 'All fields are required';
       this.flights = [];
+      this.cdr.detectChanges();
       return;
     }
     if (!this.from || !this.to) {
       this.message = 'From and To locations are required';
       this.flights = [];
+      this.cdr.detectChanges();
       return;
     }
 
     if (!this.airline) {
       this.message = 'Airline name is required';
       this.flights = [];
+      this.cdr.detectChanges();
       return;
     }
 
@@ -41,6 +47,7 @@ export class SearchFlights {
       .subscribe({
         next: (data: any[]) => {
           this.flights = data;
+          this.cdr.detectChanges();
 
           if (this.flights.length === 0) {
             this.message = 'No flights available';
@@ -67,4 +74,15 @@ export class SearchFlights {
 
     return `${hours}h ${minutes}m`;
   }
+
+  bookFlight(flight: any) {
+  if (!this.authService.isLoggedIn()) {
+    alert('Please login to book a flight');
+    this.router.navigate(['/login']);
+    return;
+  }
+
+  localStorage.setItem('selectedFlight', JSON.stringify(flight));
+  this.router.navigate(['/book']);
+}
 }
