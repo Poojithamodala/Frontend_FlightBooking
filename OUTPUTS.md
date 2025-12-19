@@ -40,6 +40,7 @@
 <img width="1898" height="945" alt="image" src="https://github.com/user-attachments/assets/18151a98-c886-4bfb-9b55-f5effd385509" />
 <br><br>
 <h1>7)Eureka</h1>
+<h1>Update: Added unit tests while building docker image</h1>
 <img width="1908" height="1027" alt="image" src="https://github.com/user-attachments/assets/f1f9231c-a90a-4f54-a1f0-4e0e7ef24656" />
 <img width="1471" height="594" alt="image" src="https://github.com/user-attachments/assets/d46cb27b-762b-4c41-8267-4f4be7ee8005" />
 
