@@ -2,13 +2,16 @@
 <!-- <router-outlet></router-outlet> -->
 
 <div class="landing" *ngIf="isHome">
-  <h1>✈️ Flight Booking System</h1>
-  <p>Fly. Relax. Smile.</p>
+  <div class="overlay"></div>
 
-  <div class="actions">
-    <button (click)="goToLogin()" class="btn primary">Login</button>
-    <button (click)="goToRegister()" class="btn outline">Register</button>
+  <div class="content">
+    <h1>✈️ Flight Booking System</h1>
+    <p>Fly. Relax. Smile.</p>
+
+    <div class="actions">
+      <button (click)="goToLogin()" class="btn primary">Login</button>
+      <button (click)="goToRegister()" class="btn outline">Register</button>
+    </div>
   </div>
-
 </div>
 <router-outlet *ngIf="!isHome"></router-outlet>
