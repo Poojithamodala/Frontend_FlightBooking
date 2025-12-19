@@ -1,0 +1,18 @@
+<div class="profile-container" *ngIf="!loading && user">
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="avatar">{{ user.username.charAt(0).toUpperCase() }}</div>
+      <h2>{{ user.username }}</h2>
+      <p class="role">{{ user.role }}</p>
+    </div>
+
+    <div class="profile-info">
+      <div class="info-row"><span>Email:</span> {{ user.email }}</div>
+      <div class="info-row"><span>Age:</span> {{ user.age }}</div>
+      <div class="info-row"><span>Gender:</span> {{ user.gender }}</div>
+    </div>
+  </div>
+</div>
+
+<p *ngIf="loading" class="loading">⏳ Loading profile...</p>
+<p *ngIf="error" class="error">{{ error }}</p>
