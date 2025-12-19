@@ -1,0 +1,138 @@
+<div class="ticket" *ngIf="flight">
+
+  <div class="ticket-header">
+    <div>
+      <h2>{{ flight.fromPlace }} → {{ flight.toPlace }}</h2>
+      <p class="sub-text">
+        {{ flight.departureTime | date:'EEEE, MMM d' }}
+        {{ flight.duration }}
+      </p>
+    </div>
+  </div>
+
+  <div class="airline-row">
+    ✈️ <b>{{ flight.airline }}</b>&nbsp; {{ flight.flightNumber }}
+  </div>
+
+  <div class="time-row">
+    <div class="time-box">
+      <h1>{{ flight.departureTime | date:'HH:mm' }}</h1>
+      <p>{{ flight.fromPlace }}</p>
+    </div>
+
+    <div class="duration">
+      {{ flight.duration }}
+      <hr />
+    </div>
+
+    <div class="time-box">
+      <h1>{{ flight.arrivalTime | date:'HH:mm' }}</h1>
+      <p>{{ flight.toPlace }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="booking-box">
+  <h3>Passenger Details</h3>
+  <p class="hint">Enter details exactly as on government ID</p>
+
+  <div *ngFor="let p of passengers; let i = index" class="passenger-card">
+
+    <h4>Passenger {{ i + 1 }}</h4>
+
+    <input type="text" placeholder="Full Name" [(ngModel)]="p.name" name="name{{i}}" #name="ngModel" required
+      [ngClass]="{'invalid': name.invalid && name.touched}" />
+
+    <small class="error" *ngIf="name.invalid && name.touched">
+      Name is required
+    </small>
+
+    <div class="row">
+
+      <div>
+        <input type="number" placeholder="Age" [(ngModel)]="p.age" name="age{{i}}" #age="ngModel" required min="1"
+          max="120" [ngClass]="{'invalid': age.invalid && age.touched}" />
+
+        <small class="error" *ngIf="age.invalid && age.touched">
+          Valid age is required
+        </small>
+      </div>
+
+      <div>
+        <input type="text" placeholder="Seat Number" [(ngModel)]="p.seatNumber" name="seat{{i}}" #seat="ngModel"
+          required [ngClass]="{'invalid': seat.invalid && seat.touched || getSeatError(i)}" />
+
+        <small class="error" *ngIf="seat.invalid && seat.touched">
+          Seat number is required
+        </small>
+
+        <small class="error" *ngIf="getSeatError(i)">
+          {{ getSeatError(i) }}
+        </small>
+
+      </div>
+
+    </div>
+
+    <p class="gender-title">Gender</p>
+    <div class="gender-group">
+      <label>
+        <input type="radio" [(ngModel)]="p.gender" name="gender{{i}}" value="Male" required #gender="ngModel" />
+        Male
+      </label>
+
+      <label>
+        <input type="radio" [(ngModel)]="p.gender" name="gender{{i}}" value="Female" required />
+        Female
+      </label>
+
+      <label>
+        <input type="radio" [(ngModel)]="p.gender" name="gender{{i}}" value="Other" required />
+        Other
+      </label>
+    </div>
+
+    <small class="error" *ngIf="gender.invalid && gender.touched">
+      Gender is required
+    </small>
+
+  </div>
+
+  <button class="add-btn" (click)="addPassenger()">
+    ➕ Add Passenger
+  </button>
+
+  <button class="confirm-btn" (click)="book()" [disabled]="!isFormValid()">
+    Confirm Booking
+  </button>
+
+</div>
+
+<div *ngIf="message" class="confirmation-ticket">
+
+  <h2 class="success">Booking Confirmed</h2>
+
+  <div class="pnr-box">
+    <span>PNR</span>
+    <h1>{{ message.split(': ')[1] }}</h1>
+  </div>
+
+  <div class="confirm-section">
+    <h3>Flight Details</h3>
+    <p><b>Flight:</b> {{ flight.airline }} {{ flight.flightNumber }}</p>
+    <p><b>Route:</b> {{ flight.fromPlace }} → {{ flight.toPlace }}</p>
+    <p><b>Date:</b> {{ flight.departureTime | date:'EEEE, dd MMM yyyy' }}</p>
+    <p><b>Departure:</b> {{ flight.departureTime | date:'HH:mm' }}</p>
+    <p><b>Arrival:</b> {{ flight.arrivalTime | date:'HH:mm' }}</p>
+  </div>
+
+  <div class="confirm-section">
+    <h3>Passenger Details</h3>
+
+    <div class="passenger-print" *ngFor="let p of passengers; let i = index">
+      <p><b>Passenger {{ i + 1 }}:</b> {{ p.name }}</p>
+      <p>Age: {{ p.age }} | Gender: {{ p.gender }} | Seat: {{ p.seatNumber }}</p>
+    </div>
+  </div>
+
+</div>
