@@ -1,42 +1,60 @@
+
 .landing {
-  height: calc(100vh - 64px);
-  background: linear-gradient(135deg, #1976d2, #64b5f6);
+  position: relative;
+  height: calc(100vh - 64px); /* navbar height */
+  background-image: url('https://thumbs.dreamstime.com/b/passenger-airliner-flight-17934723.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  color: #fff;
   font-family: 'Segoe UI', sans-serif;
 }
 
-.landing h1 {
-  font-size: 38px;
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.content {
+  position: relative;
+  text-align: center;
+  color: #fff;
+  z-index: 1;
+  padding: 20px;
+}
+
+.content h1 {
+  font-size: 42px;
   margin-bottom: 10px;
 }
 
-.landing p {
-  font-size: 18px;
+.content p {
+  font-size: 20px;
   margin-bottom: 30px;
 }
 
+/* Buttons */
 .actions {
   display: flex;
   gap: 20px;
+  justify-content: center;
 }
 
 .btn {
   padding: 12px 28px;
   border-radius: 8px;
   font-size: 16px;
-  text-decoration: none;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
 .primary {
-  background: #fff;
+  background: #ffffff;
   color: #1976d2;
   border: none;
 }
@@ -46,9 +64,9 @@
 }
 
 .outline {
-  border: 2px solid #fff;
-  color: #fff;
   background: transparent;
+  border: 2px solid #ffffff;
+  color: #ffffff;
 }
 
 .outline:hover {
