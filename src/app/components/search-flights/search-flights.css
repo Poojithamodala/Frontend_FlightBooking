@@ -17,6 +17,7 @@
   display: flex;
   gap: 12px;
   margin-bottom: 16px;
+  align-items: center;
 }
 
 .form input {
@@ -35,6 +36,7 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: medium;
 }
 
 .form button:hover {
@@ -64,3 +66,23 @@ td {
   text-align: center;
   border-bottom: 1px solid #ddd;
 }
+
+.book-btn {
+  padding: 6px 14px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.book-btn:hover {
+  background-color: #1b5e20;
+}
+
+.book-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
