@@ -19,8 +19,9 @@
       <th>Airports</th>
       <th>Date</th>
       <th>Time</th>
-      <th>Duration</th>
+      <th>Available Seats</th>
       <th>Price (₹)</th>
+      <th>Action</th>
     </tr>
 
     <tr *ngFor="let f of flights">
@@ -31,8 +32,12 @@
         {{ f.departureTime | date:'HH:mm' }} -
         {{ f.arrivalTime | date:'HH:mm' }}
       </td>
-      <td>{{ getDuration(f.departureTime, f.arrivalTime) }}</td>
+      <!-- <td>{{ getDuration(f.departureTime, f.arrivalTime) }}</td> -->
+       <td>{{f.availableSeats}}</td>
       <td>₹ {{ f.price }}</td>
+      <td>
+        <button class="book-btn" type="button" (click)="bookFlight(f)">Book</button>
+    </td>
     </tr>
   </table>
 </div>
