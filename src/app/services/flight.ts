@@ -20,4 +20,11 @@ export class FlightService {
       }
     );
   }
+
+  getAllFlights() {
+    return this.http.get<any[]>(
+      `${this.apiUrl}/allflights`
+    );
+  }
+
 }

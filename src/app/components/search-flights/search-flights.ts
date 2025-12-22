@@ -77,7 +77,7 @@ export class SearchFlights {
 
   bookFlight(flight: any) {
   if (!this.authService.isLoggedIn()) {
-    alert('Please login to book a flight');
+    // alert('Please login to book a flight');
     this.router.navigate(['/login']);
     return;
   }

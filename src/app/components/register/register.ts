@@ -15,7 +15,7 @@ export class Register {
     username: '',
     email: '',
     password: '',
-    role: 'USER',
+    role: '',
     age: null as number | null,
     gender: ''
   };
@@ -23,6 +23,10 @@ export class Register {
   success = false;
 
   constructor(private authService: AuthService, private router: Router, private cdr: ChangeDetectorRef) { }
+
+  selectRole(role: 'USER'|'ADMIN'){
+    this.user.role=role;
+  }
 
   register() {
     console.log('Register method triggered');
