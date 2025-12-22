@@ -1,4 +1,3 @@
-
 .ticket {
   max-width: 700px;
   margin: 30px auto;
@@ -56,13 +55,9 @@
   max-width: 700px;
   margin: 25px auto;
   padding: 25px;
-  background: #ffffff;
+  background: #fff;
   border-radius: 14px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-}
-
-.booking-box h3 {
-  margin-bottom: 5px;
 }
 
 .hint {
@@ -85,9 +80,16 @@
   margin-bottom: 10px;
 }
 
+.remove-btn {
+  background: transparent;
+  color: #ff4d4d;
+  border: none;
+  cursor: pointer;
+}
+
 .row {
   display: flex;
-  gap: 10px;
+  gap: 50px;
 }
 
 .passenger-card input {
@@ -141,7 +143,7 @@
   max-width: 650px;
   margin: 40px auto;
   padding: 25px;
-  background: #ffffff;
+  background: #fff;
   border-radius: 14px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
@@ -194,8 +196,5 @@
 .error {
   color: #e53935;
   font-size: 12px;
-  margin-top: 2px;
   display: block;
 }
-
-
