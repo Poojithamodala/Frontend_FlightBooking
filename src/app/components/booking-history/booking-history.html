@@ -1,0 +1,56 @@
+<!-- <p>booking-history works!</p>
+<h2 class="title">My Booking History</h2>
+
+<p *ngIf="loading">Loading bookings...</p>
+<p *ngIf="error" class="error">{{ error }}</p>
+
+<div *ngIf="!loading && bookings.length === 0">
+    No bookings found
+</div>
+
+<div class="booking-card" *ngFor="let b of bookings">
+    <div><b>PNR:</b> {{ b.pnr }}</div>
+    <div><b>Trip:</b> {{ b.tripType }}</div>
+    <div><b>Seats:</b> {{ b.seatsBooked }}</div>
+    <div><b>Total:</b> ₹{{ b.totalPrice }}</div>
+    <div><b>Booking Date:</b> {{ b.bookingTime | date:'medium' }}</div>
+
+    <span class="status" [class.cancelled]="b.canceled">
+        {{ b.canceled ? 'Cancelled' : 'Confirmed' }}
+    </span>
+
+    <button
+    *ngIf="canCancel(b)"
+    class="cancel-btn"
+    (click)="cancelBooking(b.pnr)">
+    Cancel Ticket
+  </button>
+</div> -->
+<h2 class="title">My Booking History</h2>
+
+<p *ngIf="loading">Loading bookings...</p>
+<p *ngIf="error" class="error">{{ error }}</p>
+
+<div *ngIf="!loading && bookings.length === 0">
+  No bookings found
+</div>
+
+<div class="booking-card" *ngFor="let b of bookings">
+  <div><b>PNR:</b> {{ b.pnr }}</div>
+  <div><b>Trip:</b> {{ b.tripType }}</div>
+  <div><b>Seats:</b> {{ b.seatsBooked }}</div>
+  <div><b>Total:</b> ₹{{ b.totalPrice }}</div>
+  <div><b>Booking Date:</b> {{ b.bookingTime | date:'medium' }}</div>
+  <div><b>Departure:</b> {{ b.departureTime | date:'medium' }}</div>
+
+  <span class="status" [class.cancelled]="b.canceled">
+    {{ b.canceled ? 'Cancelled' : 'Confirmed' }}
+  </span>
+
+  <button
+    *ngIf="canCancel(b)"
+    class="cancel-btn"
+    (click)="cancelBooking(b.pnr)">
+    Cancel Ticket
+  </button>
+</div>

@@ -1,0 +1,37 @@
+<p>all-flights works!</p>
+<div class="container">
+  <h2>All Flights (Admin)</h2>
+
+  <p *ngIf="loading">Loading flights...</p>
+  <p *ngIf="error" class="error">{{ error }}</p>
+
+  <table *ngIf="!loading && flights.length > 0">
+    <thead>
+      <tr>
+        <th>Flight ID</th>
+        <th>Airline</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Departure</th>
+        <th>Available Seats</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let f of flights">
+        <td>{{ f.flightId }}</td>
+        <td>{{ f.airline }}</td>
+        <td>{{ f.source }}</td>
+        <td>{{ f.destination }}</td>
+        <td>{{ f.departureTime | date:'short' }}</td>
+        <td>{{ f.availableSeats }}</td>
+        <td>₹{{ f.price }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loading && flights.length === 0">
+    No flights available
+  </p>
+</div>
