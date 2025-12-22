@@ -18,10 +18,21 @@
       <option value="OTHER">Other</option>
     </select>
 
-    <select [(ngModel)]="user.role" name="role">
+    <!-- <select [(ngModel)]="user.role" name="role">
       <option value="USER">USER</option>
       <option value="ADMIN">ADMIN</option>
-    </select>
+    </select> -->
+    <div class="role-selector">
+      <button type="button" class="role-btn"
+      [class.active]="user.role === 'USER'" (click)="selectRole('USER')">
+      USER
+      </button>
+
+      <button type="button" class="role-btn"
+      [class.active]="user.role === 'ADMIN'" (click)="selectRole('ADMIN')">
+      ADMIN
+      </button>
+    </div>
 
     <button type="submit">Register</button>
   </form>

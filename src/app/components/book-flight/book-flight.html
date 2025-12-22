@@ -38,7 +38,13 @@
 
   <div *ngFor="let p of passengers; let i = index" class="passenger-card">
 
-    <h4>Passenger {{ i + 1 }}</h4>
+    <div class="passenger-header">
+      <h4>Passenger {{ i + 1 }}</h4>
+
+      <button *ngIf="passengers.length > 1" class="remove-btn" type="button" (click)="removePassenger(i)">
+        Remove
+      </button>
+    </div>
 
     <input type="text" placeholder="Full Name" [(ngModel)]="p.name" name="name{{i}}" #name="ngModel" required
       [ngClass]="{'invalid': name.invalid && name.touched}" />
@@ -124,6 +130,7 @@
     <p><b>Date:</b> {{ flight.departureTime | date:'EEEE, dd MMM yyyy' }}</p>
     <p><b>Departure:</b> {{ flight.departureTime | date:'HH:mm' }}</p>
     <p><b>Arrival:</b> {{ flight.arrivalTime | date:'HH:mm' }}</p>
+    <p><b>Total Price:</b>₹{{ flight.price * passengers.length }}</p>
   </div>
 
   <div class="confirm-section">

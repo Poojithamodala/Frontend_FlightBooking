@@ -27,7 +27,11 @@ export class BookFlight {
     this.passengers.push({ name: '', age: null, gender: '', seatNumber: '' });
   }
 
-
+  removePassenger(index: number) {
+  if (this.passengers.length > 1) {
+    this.passengers.splice(index, 1);
+  }
+}
 
   validateForm(): string | null {
     const seatSet = new Set<string>();
@@ -70,8 +74,6 @@ export class BookFlight {
     }
     return null;
   }
-
-
 
   book() {
     this.message = '';

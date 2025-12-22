@@ -30,14 +30,9 @@
 }
 
 .links button {
-  background: #e53935;
-  color: white;
+  background: transparent;
+  color: #e53935;
+  font-size: 15px;
   border: none;
-  padding: 8px 14px;
-  border-radius: 5px;
   cursor: pointer;
-}
-
-.links button:hover {
-  background: #c62828;
 }
