@@ -1,56 +1,28 @@
-<!-- <p>booking-history works!</p>
-<h2 class="title">My Booking History</h2>
+<div class="history-container" *ngIf="!loading && history.length">
+  <div class="booking-card" *ngFor="let booking of history">
+    <h3>PNR: {{ booking.pnr }} | {{ booking.tripType }}</h3>
+    <p>Airline: {{ booking.airline }}</p>
+    <p>From: {{ booking.fromPlace }} → To: {{ booking.toPlace }}</p>
+    <p>Departure: {{ booking.departureTime | date:'short' }} | Arrival: {{ booking.arrivalTime | date:'short' }}</p>
+    <p>Seats: {{ booking.seatsBooked }} | Total Price: {{ booking.totalPrice }}</p>
+    <p>Status: {{ booking.canceled ? 'Cancelled' : 'Confirmed' }}</p>
 
-<p *ngIf="loading">Loading bookings...</p>
+    <div>
+      <h4>Passengers:</h4>
+      <ul>
+        <li *ngFor="let p of booking.passengers">
+          {{ p.name }} ({{ p.gender }}, {{ p.age }} yrs) - Seat: {{ p.seatNumber }}
+        </li>
+      </ul>
+    </div>
+
+    <button *ngIf="!booking.canceled" (click)="cancelBooking(booking.pnr)">
+      Cancel Booking
+    </button>
+    <hr>
+  </div>
+</div>
+
+<p *ngIf="loading" class="loading">⏳ Loading booking history...</p>
+<p *ngIf="!loading && history.length === 0">No booking history found.</p>
 <p *ngIf="error" class="error">{{ error }}</p>
-
-<div *ngIf="!loading && bookings.length === 0">
-    No bookings found
-</div>
-
-<div class="booking-card" *ngFor="let b of bookings">
-    <div><b>PNR:</b> {{ b.pnr }}</div>
-    <div><b>Trip:</b> {{ b.tripType }}</div>
-    <div><b>Seats:</b> {{ b.seatsBooked }}</div>
-    <div><b>Total:</b> ₹{{ b.totalPrice }}</div>
-    <div><b>Booking Date:</b> {{ b.bookingTime | date:'medium' }}</div>
-
-    <span class="status" [class.cancelled]="b.canceled">
-        {{ b.canceled ? 'Cancelled' : 'Confirmed' }}
-    </span>
-
-    <button
-    *ngIf="canCancel(b)"
-    class="cancel-btn"
-    (click)="cancelBooking(b.pnr)">
-    Cancel Ticket
-  </button>
-</div> -->
-<h2 class="title">My Booking History</h2>
-
-<p *ngIf="loading">Loading bookings...</p>
-<p *ngIf="error" class="error">{{ error }}</p>
-
-<div *ngIf="!loading && bookings.length === 0">
-  No bookings found
-</div>
-
-<div class="booking-card" *ngFor="let b of bookings">
-  <div><b>PNR:</b> {{ b.pnr }}</div>
-  <div><b>Trip:</b> {{ b.tripType }}</div>
-  <div><b>Seats:</b> {{ b.seatsBooked }}</div>
-  <div><b>Total:</b> ₹{{ b.totalPrice }}</div>
-  <div><b>Booking Date:</b> {{ b.bookingTime | date:'medium' }}</div>
-  <div><b>Departure:</b> {{ b.departureTime | date:'medium' }}</div>
-
-  <span class="status" [class.cancelled]="b.canceled">
-    {{ b.canceled ? 'Cancelled' : 'Confirmed' }}
-  </span>
-
-  <button
-    *ngIf="canCancel(b)"
-    class="cancel-btn"
-    (click)="cancelBooking(b.pnr)">
-    Cancel Ticket
-  </button>
-</div>

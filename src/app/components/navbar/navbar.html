@@ -1,4 +1,4 @@
-<nav class="navbar">
+<!-- <nav class="navbar">
   <div class="logo">✈️ Flight Booking</div>
 
   <div class="links">
@@ -8,7 +8,39 @@
     <a routerLink="/register" *ngIf="!isLoggedIn()">Register</a>
 
     <a routerLink="/search" >Search Flights</a>
+
+    <a routerLink="/add-flight" *ngIf="isLoggedIn() && isAdmin()">
+      Add Flight
+    </a>
+    
     <a routerLink="/profile" *ngIf="isLoggedIn()">Profile</a>
     <button *ngIf="isLoggedIn()" (click)="logout()" class="logout-btn">Logout</button>
+  </div>
+</nav> -->
+<nav class="navbar">
+  <div class="logo">✈️ Flight Booking</div>
+
+  <div class="links">
+    <a routerLink="/">Home</a>
+    <a routerLink="/search">Search Flights</a>
+
+    @if (!isLoggedIn()) {
+      <a routerLink="/login">Login</a>
+      <a routerLink="/register">Register</a>
+    }
+
+    @if (isLoggedIn()) {
+      <a routerLink="/profile">Profile</a>
+
+      <a routerLink="/change-password">Change Password</a>
+
+      @if (isAdmin()) {
+        <a routerLink="/add-flight">Add Flight</a>
+      }
+
+      <button (click)="logout()" class="logout-btn">
+        Logout
+      </button>
+    }
   </div>
 </nav>

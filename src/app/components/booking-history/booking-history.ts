@@ -1,7 +1,8 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { BookingService } from '../../services/booking';
+import { BookingHistoryDTO, BookingService } from '../../services/booking';
 import { CommonModule } from '@angular/common';
-import { BookingHistoryDTO } from '../../models/BookingHistoryDTO';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,51 +11,45 @@ import { BookingHistoryDTO } from '../../models/BookingHistoryDTO';
   templateUrl: './booking-history.html',
   styleUrl: './booking-history.css',
 })
-export class BookingHistory {
-  bookings: BookingHistoryDTO[] = [];
+export class BookingHistoryComponent {
+  history: BookingHistoryDTO[] = [];
   loading = true;
-  error = '';
+  error: string | null = null;
 
-  constructor(private bookingService: BookingService, private cdr: ChangeDetectorRef) {}
+  constructor(private bookingService: BookingService) {}
 
   ngOnInit(): void {
+    this.fetchHistory();
+  }
+
+  fetchHistory() {
+    this.loading = true;
+    this.error = null;
+
     this.bookingService.getBookingHistory().subscribe({
-      next: (data) => {
-        this.bookings = data;
+      next: data => {
+        this.history = data;
         this.loading = false;
-        this.cdr.detectChanges();
-      //   this.bookings = data ?? []; 
-      // this.loading = false; 
       },
-      error: () => {
-        this.error = 'Failed to load booking history';
-        this.bookings = [];  
+      error: err => {
+        this.error = 'Failed to fetch booking history';
+        console.error(err);
         this.loading = false;
       }
     });
   }
 
-  canCancel(booking: BookingHistoryDTO): boolean {
-    if (booking.canceled) return false;
-
-    const departure = new Date(booking.departureTime).getTime();
-    const now = new Date().getTime();
-
-    const hoursDiff = (departure - now) / (1000 * 60 * 60);
-
-    return hoursDiff >= 24;
-  }
-
   cancelBooking(pnr: string) {
-    if (!confirm('Are you sure you want to cancel this ticket?')) return;
+    if (!confirm(`Are you sure you want to cancel booking ${pnr}?`)) return;
 
     this.bookingService.cancelBooking(pnr).subscribe({
       next: () => {
-        const booking = this.bookings.find(b => b.pnr === pnr);
-        if (booking) booking.canceled = true;
+        alert('Booking cancelled successfully!');
+        this.fetchHistory(); // refresh list
       },
-      error: () => {
+      error: err => {
         alert('Failed to cancel booking');
+        console.error(err);
       }
     });
   }

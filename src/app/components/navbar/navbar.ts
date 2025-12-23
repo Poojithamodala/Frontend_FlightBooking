@@ -10,18 +10,15 @@ import { CommonModule } from '@angular/common';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  // isHome=false;
   constructor(private authService: AuthService, private router: Router, private cdr: ChangeDetectorRef) { 
-    // this.router.events.subscribe(event => {
-    //   if (event instanceof NavigationEnd) {
-    //     this.isHome = this.router.url === '/' || this.router.url === '';
-    //     this.cdr.detectChanges();
-    //   }
-    // });
   }
 
   isLoggedIn() {
     return this.authService.isLoggedIn();
+  }
+
+  isAdmin() {
+    return this.authService.isAdmin();
   }
 
 logout() {

@@ -61,4 +61,34 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
+   getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  getUserRole(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.roles?.[0] || null;   // ADMIN / USER
+  }
+
+  isAdmin(): boolean {
+    return this.getUserRole() === 'ADMIN';
+  }
+
+  changePassword(data: { oldPassword: string; newPassword: string }) {
+  const token = localStorage.getItem('token');
+
+  return this.http.put(
+    `${this.apiGateway}/changepassword`,
+    data,
+    {
+      headers: token
+        ? { Authorization: `Bearer ${token}` }: {},
+        responseType: 'text'
+    }
+  );
+}
+
 }
