@@ -1,0 +1,70 @@
+<div class="add-flight-container">
+  <h2>Add Flight</h2>
+
+  <form (ngSubmit)="addFlight()">
+
+    <input
+      type="text"
+      placeholder="Airline"
+      [(ngModel)]="flight.airline"
+      name="airline"
+      required
+    />
+
+    <input
+      type="text"
+      placeholder="From"
+      [(ngModel)]="flight.fromPlace"
+      name="fromPlace"
+      required
+    />
+
+    <input
+      type="text"
+      placeholder="To"
+      [(ngModel)]="flight.toPlace"
+      name="toPlace"
+      required
+    />
+
+    <label>Departure Time</label>
+    <input
+      type="datetime-local"
+      [(ngModel)]="flight.departureTime"
+      name="departureTime"
+      required
+    />
+
+    <label>Arrival Time</label>
+    <input
+      type="datetime-local"
+      [(ngModel)]="flight.arrivalTime"
+      name="arrivalTime"
+      required
+    />
+
+    <input
+      type="number"
+      placeholder="Price"
+      [(ngModel)]="flight.price"
+      name="price"
+      required
+    />
+
+    <input
+      type="number"
+      placeholder="Total Seats"
+      [(ngModel)]="flight.totalSeats"
+      name="totalSeats"
+      required
+    />
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Adding...' : 'Add Flight' }}
+    </button>
+  </form>
+
+  @if (message) {
+    <p class="msg">{{ message }}</p>
+  }
+</div>
