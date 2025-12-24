@@ -36,4 +36,8 @@ export class Profile {
   goToBookingHistory() {
     this.router.navigate(['/booking-history']);
   }
+
+  goToChangePassword() {
+  this.router.navigate(['/change-password']);
+}
 }
