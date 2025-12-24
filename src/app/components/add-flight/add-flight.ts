@@ -38,15 +38,15 @@ export class AddFlight {
 
   minDateTime!: string;
 
-ngOnInit() {
-  this.setMinDateTime();
-}
+  ngOnInit() {
+    this.setMinDateTime();
+  }
 
-setMinDateTime() {
-  const now = new Date();
-  now.setSeconds(0, 0); // remove seconds & milliseconds
-  this.minDateTime = now.toISOString().slice(0, 16);
-}
+  setMinDateTime() {
+    const now = new Date();
+    now.setSeconds(0, 0); // remove seconds & milliseconds
+    this.minDateTime = now.toISOString().slice(0, 16);
+  }
 
   constructor(private flightService: FlightService, private cdr: ChangeDetectorRef) { }
 
@@ -59,7 +59,7 @@ setMinDateTime() {
     if (this.flight.fromPlace.trim().toLowerCase() ===
       this.flight.toPlace.trim().toLowerCase()) {
       this.message = 'From and To locations cannot be the same';
-      this.loading = false;  
+      this.loading = false;
       return;
     }
 
@@ -69,37 +69,37 @@ setMinDateTime() {
 
     if (departure <= now) {
       this.message = 'Departure time must be in the future';
-      this.loading = false;  
+      this.loading = false;
       return;
     }
 
     if (arrival <= departure) {
       this.message = 'Arrival time must be after departure time';
-      this.loading = false;  
+      this.loading = false;
       return;
     }
 
     if (this.flight.price === null || this.flight.price <= 0) {
       this.message = 'Price must be greater than zero';
-      this.loading = false;  
+      this.loading = false;
       return;
     }
 
     if (this.flight.price > 100000) {
       this.message = 'Price is too high';
-      this.loading = false;  
+      this.loading = false;
       return;
     }
 
     if (this.flight.totalSeats === null || this.flight.totalSeats <= 0) {
       this.message = 'Total seats must be greater than zero';
-      this.loading = false;  
+      this.loading = false;
       return;
     }
 
     if (this.flight.totalSeats > 500) {
       this.message = 'Total seats cannot exceed 500';
-      this.loading = false;  
+      this.loading = false;
       return;
     }
 

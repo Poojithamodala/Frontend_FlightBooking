@@ -24,9 +24,9 @@ export class SearchFlights {
   ];
 
   airlines: string[] = [
-    'IndiGo',
+    'Indigo',
     'Air India',
-    'GoAir',
+    'Goair',
     'Vistara',
     'Akasa Air',
     'SpiceJet'
@@ -62,7 +62,7 @@ export class SearchFlights {
       return;
     }
 
-    this.flightService.search(this.from.toLowerCase(), this.to.toLowerCase(), this.airline.toLowerCase())
+    this.flightService.search(this.from, this.to, this.airline)
       .subscribe({
         next: (data: any[]) => {
           this.flights = data;
