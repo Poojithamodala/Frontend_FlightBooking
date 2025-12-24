@@ -108,14 +108,21 @@
 <img width="1894" height="769" alt="image" src="https://github.com/user-attachments/assets/ec14905f-af91-429a-8f4e-27184347a176" />
 
 <h1>Booking History</h1>
-<img width="1906" height="966" alt="image" src="https://github.com/user-attachments/assets/11db9519-8d79-45a0-9bd5-1893dc9425d7" />
-<img width="1897" height="969" alt="image" src="https://github.com/user-attachments/assets/4bbc2546-d7b9-4664-b02b-520232d6eacf" />
+<img width="1881" height="955" alt="image" src="https://github.com/user-attachments/assets/7deacc7f-5423-4f1b-b3d9-7c0bb46e62b0" />
+<h1>Booking history is sorted to show only active tickets on top</h1>
+<h1>Cancel ticket</h1>
+<img width="1895" height="864" alt="image" src="https://github.com/user-attachments/assets/af72b1ab-bf2f-4c55-ba39-a9585981bf40" />
+<img width="1869" height="964" alt="image" src="https://github.com/user-attachments/assets/90f76262-6771-4828-94e1-18adc8120754" />
 
 <h1>Token</h1>
+<img width="1877" height="936" alt="image" src="https://github.com/user-attachments/assets/b1e6c3ae-bcbf-4afc-abc9-59cdbd5ceb37" />
+
 <img width="1414" height="644" alt="image" src="https://github.com/user-attachments/assets/3c43c936-a564-4ed0-b4f3-67cef7a69f86" />
 
 <h1>Logout works and redirects to login page</h1>
 <img width="1914" height="799" alt="image" src="https://github.com/user-attachments/assets/d920fe50-0172-4e88-9e4b-e1b4a58f3068" />
+<h1>Token will be cleared after logout</h1>
+<img width="1897" height="794" alt="image" src="https://github.com/user-attachments/assets/0e2e2b86-c5e1-48af-8192-32bd8f7f2307" />
 
 
 
