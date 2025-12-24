@@ -108,19 +108,24 @@
     ➕ Add Passenger
   </button>
 
-  <button class="confirm-btn" (click)="book()" [disabled]="!isFormValid()">
+  <div *ngIf="errorMessage" class="error-box" style="color:red; font-size:16px; margin:10px 0;">
+     {{ errorMessage }}
+  </div>
+
+  <!-- <button class="confirm-btn" (click)="book()" [disabled]="!isFormValid()"> -->
+    <button class="confirm-btn" (click)="book()" [disabled]="isLoading">
     Confirm Booking
   </button>
 
 </div>
 
-<div *ngIf="message" class="confirmation-ticket">
+<div *ngIf="successMessage" class="confirmation-ticket">
 
   <h2 class="success">Booking Confirmed</h2>
 
   <div class="pnr-box">
     <span>PNR</span>
-    <h1>{{ message.split(': ')[1] }}</h1>
+    <h1>{{ pnr }}</h1>
   </div>
 
   <div class="confirm-section">
@@ -130,7 +135,7 @@
     <p><b>Date:</b> {{ flight.departureTime | date:'EEEE, dd MMM yyyy' }}</p>
     <p><b>Departure:</b> {{ flight.departureTime | date:'HH:mm' }}</p>
     <p><b>Arrival:</b> {{ flight.arrivalTime | date:'HH:mm' }}</p>
-    <p><b>Total Price:</b>₹{{ flight.price * passengers.length }}</p>
+    <p><b>Total Price:</b> ₹{{ flight.price * passengers.length }}</p>
   </div>
 
   <div class="confirm-section">

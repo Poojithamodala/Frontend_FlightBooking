@@ -12,15 +12,20 @@ import { FormsModule } from '@angular/forms';
 })
 export class BookFlight {
   flight: any;
-  passengers: any[] = [
-    { name: '', age: null, gender: '', seatNumber: '' }
-  ];
+  // passengers: any[] = [
+  //   { name: '', age: null, gender: '', seatNumber: '' }
+  // ];
+  passengers: any[] = [];
   message = '';
+  successMessage = '';
+  errorMessage = '';
+  pnr = '';
 
   constructor(private bookingService: BookingService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.flight = JSON.parse(localStorage.getItem('selectedFlight') || '{}');
+    this.addPassenger();
   }
 
   addPassenger() {
@@ -28,10 +33,10 @@ export class BookFlight {
   }
 
   removePassenger(index: number) {
-  if (this.passengers.length > 1) {
-    this.passengers.splice(index, 1);
+    if (this.passengers.length > 1) {
+      this.passengers.splice(index, 1);
+    }
   }
-}
 
   validateForm(): string | null {
     const seatSet = new Set<string>();
@@ -64,8 +69,8 @@ export class BookFlight {
     for (let i = 0; i < this.passengers.length; i++) {
       if (i !== index) {
         const otherSeat = this.passengers[i].seatNumber;
-          // ?.trim()
-          // .toUpperCase();
+        // ?.trim()
+        // .toUpperCase();
 
         if (otherSeat === trimSeat) {
           return `Seat ${trimSeat} is already selected`;
@@ -75,32 +80,54 @@ export class BookFlight {
     return null;
   }
 
+  isLoading = false;
   book() {
-    this.message = '';
+  this.errorMessage = '';
+  this.successMessage = '';
 
-    const validationError = this.validateForm();
-    if (validationError) {
-      this.message = validationError;
-      return;
-    }
+  if (this.isLoading) return;
+  this.isLoading = true;
 
-    this.bookingService.book(
-      this.flight.id,
-      {
-        tripType: 'ONE_WAY',
-        passengers: this.passengers
-      }
-    ).subscribe({
-      next: (pnr: string) => {
-        this.message = 'Booking successful! PNR: ' + pnr;
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        this.message =
-          err?.error?.message || 'Booking failed. Please try again.';
-      }
-    });
+  const validationError = this.validateForm();
+  if (validationError) {
+    this.errorMessage = validationError;
+    this.isLoading = false;
+    return;
   }
+
+  this.bookingService.book(
+    this.flight.id,
+    {
+      tripType: 'ONE_WAY',
+      returnFlightId: null,
+      passengers: this.passengers
+    }
+  ).subscribe({
+    next: (pnr: string) => {
+      this.pnr = pnr;
+      this.successMessage = 'Booking successful';
+      this.isLoading = false;
+      this.cdr.detectChanges();
+    },
+    error: (err) => {
+  if (typeof err.error === 'string') {
+    try {
+      const parsed = JSON.parse(err.error);
+      this.errorMessage = parsed.message || 'Booking failed';
+    } catch {
+      this.errorMessage = err.error;
+    }
+  } else if (err.error?.message) {
+    this.errorMessage = err.error.message;
+  } else {
+    this.errorMessage = 'Booking failed';
+  }
+
+  this.isLoading = false;
+  this.cdr.detectChanges();
+}
+  });
+}
 
   isFormValid(): boolean {
     return this.validateForm() === null;
