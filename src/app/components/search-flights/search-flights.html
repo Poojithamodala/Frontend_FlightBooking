@@ -2,14 +2,36 @@
   <h2>Search Flights</h2>
 
   <div class="form">
-    <input type="text" placeholder="From" [(ngModel)]="from" name="from" />
+  <!-- FROM -->
+  <select [(ngModel)]="from" name="from" required>
+    <option value="" disabled selected>Select From</option>
+    <option *ngFor="let place of places" [value]="place">
+      {{ place }}
+    </option>
+  </select>
 
-    <input type="text" placeholder="To" [(ngModel)]="to" name="to" />
+  <!-- TO -->
+  <select [(ngModel)]="to" name="to">
+    <option value="" disabled selected>Select To</option>
+    <option
+      *ngFor="let place of places"
+      [value]="place"
+      [disabled]="place === from"
+    >
+      {{ place }}
+    </option>
+  </select>
 
-    <input type="text" placeholder="Airline Name" [(ngModel)]="airline" name="airline" />
+  <!-- AIRLINE -->
+  <select [(ngModel)]="airline" name="airline">
+    <option value="" disabled selected>Select Airline</option>
+    <option *ngFor="let a of airlines" [value]="a">
+      {{ a }}
+    </option>
+  </select>
 
-    <button (click)="search()">Search</button>
-  </div>
+  <button (click)="search()">Search</button>
+</div>
 
   <p class="msg">{{ message }}</p>
 

@@ -12,6 +12,25 @@ import { Router } from '@angular/router';
   styleUrl: './search-flights.css',
 })
 export class SearchFlights {
+   places: string[] = [
+    'Hyderabad',
+    'Bangalore',
+    'Chennai',
+    'Delhi',
+    'Mumbai',
+    'Kolkata',
+    'Pune',
+    'Ahmedabad'
+  ];
+
+  airlines: string[] = [
+    'IndiGo',
+    'Air India',
+    'GoAir',
+    'Vistara',
+    'Akasa Air',
+    'SpiceJet'
+  ];
   from = '';
   to = '';
   airline = '';
@@ -43,7 +62,7 @@ export class SearchFlights {
       return;
     }
 
-    this.flightService.search(this.from, this.to, this.airline)
+    this.flightService.search(this.from.toLowerCase(), this.to.toLowerCase(), this.airline.toLowerCase())
       .subscribe({
         next: (data: any[]) => {
           this.flights = data;
@@ -51,6 +70,7 @@ export class SearchFlights {
 
           if (this.flights.length === 0) {
             this.message = 'No flights available';
+            this.cdr.detectChanges();
           } else {
             this.message = '';
           }
@@ -58,6 +78,7 @@ export class SearchFlights {
         error: () => {
           this.flights = [];
           this.message = 'Error fetching flights';
+          this.cdr.detectChanges();
         }
       });
   }
