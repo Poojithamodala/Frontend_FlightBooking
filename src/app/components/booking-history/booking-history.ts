@@ -16,10 +16,11 @@ export class BookingHistoryComponent {
   loading = true;
   error: string | null = null;
 
-  constructor(private bookingService: BookingService) {}
+  constructor(private bookingService: BookingService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.fetchHistory();
+    this.cdr.detectChanges();
   }
 
   fetchHistory() {
@@ -30,11 +31,13 @@ export class BookingHistoryComponent {
       next: data => {
         this.history = data;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: err => {
         this.error = 'Failed to fetch booking history';
         console.error(err);
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }

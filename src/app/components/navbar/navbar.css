@@ -36,3 +36,14 @@
   border: none;
   cursor: pointer;
 }
+
+.admin-badge {
+  background-color: #3bff69;
+  color: black;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 7px;
+  margin-left: 8px;
+  border-radius: 4px;
+  vertical-align: middle;
+}

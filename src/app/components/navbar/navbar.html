@@ -1,5 +1,10 @@
-<!-- <nav class="navbar">
-  <div class="logo">✈️ Flight Booking</div>
+<nav class="navbar">
+  <div class="logo">
+    ✈️ Flight Booking
+    <span class="admin-badge" *ngIf="isLoggedIn() && isAdmin()">
+      ADMIN
+    </span>
+  </div>
 
   <div class="links">
     <a routerLink="/">Home</a>
@@ -16,8 +21,8 @@
     <a routerLink="/profile" *ngIf="isLoggedIn()">Profile</a>
     <button *ngIf="isLoggedIn()" (click)="logout()" class="logout-btn">Logout</button>
   </div>
-</nav> -->
-<nav class="navbar">
+</nav>
+<!-- <nav class="navbar">
   <div class="logo">✈️ Flight Booking</div>
 
   <div class="links">
@@ -43,4 +48,4 @@
       </button>
     }
   </div>
-</nav>
+</nav> -->

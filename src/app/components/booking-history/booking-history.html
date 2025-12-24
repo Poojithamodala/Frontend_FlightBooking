@@ -24,5 +24,5 @@
 </div>
 
 <p *ngIf="loading" class="loading">⏳ Loading booking history...</p>
-<p *ngIf="!loading && history.length === 0">No booking history found.</p>
+<p *ngIf="!loading && history.length === 0" class="empty-state">No booking history found.</p>
 <p *ngIf="error" class="error">{{ error }}</p>

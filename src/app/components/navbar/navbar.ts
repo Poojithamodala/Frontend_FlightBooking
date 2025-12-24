@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  constructor(private authService: AuthService, private router: Router, private cdr: ChangeDetectorRef) { 
+  constructor(private authService: AuthService, private router: Router, private cdr: ChangeDetectorRef) {
   }
 
   isLoggedIn() {
@@ -21,15 +21,16 @@ export class Navbar {
     return this.authService.isAdmin();
   }
 
-logout() {
-  this.authService.logout().subscribe({
-    next: () => {
-      alert('Logged out successfully!');
-      this.router.navigate(['/login']); // redirect to login page
-    },
-    error: () => {
-      alert('Error logging out, please try again.');
-    }
-  });
-}
+  logout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        alert('Logged out successfully!');
+        this.router.navigate(['/login']); // redirect to login page
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        alert('Error logging out, please try again.');
+      }
+    });
+  }
 }

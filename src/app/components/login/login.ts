@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth';
 import { Router, RouterModule } from '@angular/router';
@@ -15,7 +15,7 @@ export class Login {
   message = '';
   loading = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private cdr: ChangeDetectorRef) { }
 
   login() {
     this.message = '';
@@ -49,10 +49,17 @@ export class Login {
       next: () => {
         this.loading = false;
         this.router.navigate(['/search']);
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.loading = false;
-        this.message = err?.error || 'Invalid email or password';
+
+        if (typeof err?.error === 'string') {
+          this.message = err.error;
+          this.cdr.detectChanges();
+        } else {
+          this.message = 'Login failed. Please try again';
+        }
       }
     });
   }

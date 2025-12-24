@@ -1,70 +1,82 @@
 <div class="add-flight-container">
   <h2>Add Flight</h2>
 
-  <form (ngSubmit)="addFlight()">
+  <form #flightForm="ngForm" (ngSubmit)="addFlight(flightForm)">
 
-    <input
-      type="text"
-      placeholder="Airline"
-      [(ngModel)]="flight.airline"
-      name="airline"
-      required
-    />
 
-    <input
-      type="text"
-      placeholder="From"
-      [(ngModel)]="flight.fromPlace"
-      name="fromPlace"
-      required
-    />
+    <input type="text" placeholder="Airline" [(ngModel)]="flight.airline" name="airline" required
+      pattern="^[A-Za-z ]{2,30}$" #airline="ngModel" [class.invalid]="airline.invalid && airline.touched" />
 
-    <input
-      type="text"
-      placeholder="To"
-      [(ngModel)]="flight.toPlace"
-      name="toPlace"
-      required
-    />
+    <p class="field-error" *ngIf="airline.invalid && airline.touched">
+      Airline is required (letters only)
+    </p>
 
-    <label>Departure Time</label>
-    <input
-      type="datetime-local"
-      [(ngModel)]="flight.departureTime"
-      name="departureTime"
-      required
-    />
 
-    <label>Arrival Time</label>
-    <input
-      type="datetime-local"
-      [(ngModel)]="flight.arrivalTime"
-      name="arrivalTime"
-      required
-    />
+    <input type="text" placeholder="From" [(ngModel)]="flight.fromPlace" name="fromPlace" required
+      pattern="^[A-Za-z ]{2,30}$" #fromPlace="ngModel" [class.invalid]="fromPlace.invalid && fromPlace.touched" />
 
-    <input
-      type="number"
-      placeholder="Price"
-      [(ngModel)]="flight.price"
-      name="price"
-      required
-    />
+    <p class="field-error" *ngIf="fromPlace.invalid && fromPlace.touched">
+      From location is required
+    </p>
 
-    <input
-      type="number"
-      placeholder="Total Seats"
-      [(ngModel)]="flight.totalSeats"
-      name="totalSeats"
-      required
-    />
 
-    <button type="submit" [disabled]="loading">
+    <input type="text" placeholder="To" [(ngModel)]="flight.toPlace" name="toPlace" required pattern="^[A-Za-z ]{2,30}$"
+      #toPlace="ngModel" [class.invalid]="toPlace.invalid && toPlace.touched" />
+
+    <p class="field-error" *ngIf="toPlace.invalid && toPlace.touched">
+      To location is required
+    </p>
+
+
+    <input type="datetime-local" [(ngModel)]="flight.departureTime" name="departureTime" required [min]="minDateTime"
+      #departureTime="ngModel" [class.invalid]="departureTime.invalid && departureTime.touched" />
+
+
+    <p class="field-error" *ngIf="departureTime.invalid && departureTime.touched">
+      Departure time is required
+    </p>
+
+
+    <input type="datetime-local" [(ngModel)]="flight.arrivalTime" name="arrivalTime" required
+      [min]="flight.departureTime || minDateTime" #arrivalTime="ngModel"
+      [class.invalid]="arrivalTime.invalid && arrivalTime.touched" />
+
+    <p class="field-error" *ngIf="arrivalTime.invalid && arrivalTime.touched">
+      Arrival time is required
+    </p>
+
+
+    <input type="number" placeholder="Price" [(ngModel)]="flight.price" name="price" required min="1" #price="ngModel"
+      [class.invalid]="price.invalid && price.touched" />
+
+    <p class="field-error" *ngIf="price.invalid && price.touched">
+      Price must be greater than zero
+    </p>
+
+
+    <input type="number" placeholder="Total Seats" [(ngModel)]="flight.totalSeats" name="totalSeats" required min="1"
+      max="500" #totalSeats="ngModel" [class.invalid]="totalSeats.invalid && totalSeats.touched" />
+
+    <p class="field-error" *ngIf="totalSeats.invalid && totalSeats.touched">
+      Total seats must be between 1 and 500
+    </p>
+
+
+    <input type="number" placeholder="Available Seats" [(ngModel)]="flight.availableSeats" name="availableSeats"
+      required min="0" #availableSeats="ngModel" [class.invalid]="availableSeats.invalid && availableSeats.touched" />
+
+    <p class="field-error" *ngIf="availableSeats.invalid && availableSeats.touched">
+      Available seats cannot be negative
+    </p>
+
+
+    <button type="submit" [disabled]="loading || flightForm.invalid">
       {{ loading ? 'Adding...' : 'Add Flight' }}
     </button>
+
   </form>
 
   @if (message) {
-    <p class="msg">{{ message }}</p>
+  <p class="msg">{{ message }}</p>
   }
 </div>

@@ -48,18 +48,6 @@ export class BookingService {
     return this.http.post(`${this.apiUrl}/booking/${flightId}`, body, { headers, responseType: 'text' });
   }
 
-  // getBookingHistory(): Observable<BookingHistoryDTO[]> {
-  //   const token = localStorage.getItem('token');
-
-  //   const headers = new HttpHeaders({
-  //     Authorization: `Bearer ${token}`
-  //   });
-
-  //   return this.http.get<BookingHistoryDTO[]>(
-  //     `${this.apiUrl}/booking/history`,
-  //     { headers }
-  //   );
-  // }
   getBookingHistory(): Observable<BookingHistoryDTO[]> {
     const token = localStorage.getItem('token');
 
