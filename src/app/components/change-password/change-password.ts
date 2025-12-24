@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth';
 import { Router } from '@angular/router';
@@ -19,20 +19,37 @@ export class ChangePassword {
   message = '';
   error = '';
   loading = false;
+  passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 
-  constructor(private authService: AuthService, private router: Router) { }
+
+  constructor(private authService: AuthService, private router: Router, private cdr: ChangeDetectorRef) { }
 
   submit() {
     this.message = '';
     this.error = '';
 
-    if (!this.form.oldPassword || !this.form.newPassword) {
+    const oldPassword = this.form.oldPassword?.trim();
+    const newPassword = this.form.newPassword?.trim();
+
+    if (!oldPassword || !newPassword) {
       this.error = 'All fields are required';
       return;
     }
 
-    if (this.form.newPassword.length < 6) {
-      this.error = 'New password must be at least 6 characters';
+    if (oldPassword === newPassword) {
+      this.error = 'New password must be different from old password';
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      this.error = 'Password must be at least 6 characters long';
+      return;
+    }
+
+    if (!this.passwordRegex.test(newPassword)) {
+      this.error =
+        'Password must contain uppercase, lowercase, number, and special character';
       return;
     }
 
@@ -46,10 +63,12 @@ export class ChangePassword {
         this.form.newPassword = '';
         localStorage.removeItem('token');
         this.router.navigate(['/login']);
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.loading = false;
-        this.error = err?.error?.message || err?.error || 'Old password is incorrect';
+        this.error = err.error || 'Old password is incorrect';
+        this.cdr.detectChanges();
       }
     });
   }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 import { User } from '../models/user';
 
 @Injectable({
@@ -33,33 +33,60 @@ export class AuthService {
     );
   }
 
+  // logout() {
+  //   const token = localStorage.getItem('token');
+
+  //   return this.http.post(
+  //     `${this.apiGateway}/logout`,
+  //     {},
+  //     {
+  //       headers: token
+  //         ? { Authorization: `Bearer ${token}` } : {},
+  //         responseType: 'text'
+  //     }
+  //   ).pipe(
+  //     tap(() => localStorage.removeItem('token'))
+  //   );
+  // }
   logout() {
-    const token = localStorage.getItem('token');
+  return this.http.post(
+    `${this.apiGateway}/logout`,
+    {},
+    { responseType: 'text' }
+  ).pipe(
+    tap(() => localStorage.removeItem('token')),
+    catchError(() => {
+      // even if backend fails, frontend MUST logout
+      localStorage.removeItem('token');
+      return [];
+    })
+  );
+}
 
-    return this.http.post(
-      `${this.apiGateway}/logout`,
-      {},
-      {
-        headers: token
-          ? { Authorization: `Bearer ${token}` } : {},
-          responseType: 'text'
-      }
-    ).pipe(
-      tap(() => localStorage.removeItem('token'))
-    );
-  }
 
+  // getProfile() {
+  //   const token = localStorage.getItem('token');
+
+  //   return this.http.get<User>(`${this.apiGateway}/profile`, {
+  //   headers: token ? { Authorization: `Bearer ${token}` } : {}
+  //   });
+  // }
   getProfile() {
-    const token = localStorage.getItem('token');
+  return this.http.get<User>(`${this.apiGateway}/profile`);
+}
 
-    return this.http.get<User>(`${this.apiGateway}/profile`, {
-    headers: token ? { Authorization: `Bearer ${token}` } : {}
-    });
-  }
 
+  // isLoggedIn(): boolean {
+  //   return !!localStorage.getItem('token');
+  // }
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
-  }
+  const token = localStorage.getItem('token');
+  if (!token) return false;
+
+  const payload = JSON.parse(atob(token.split('.')[1]));
+  return payload.exp * 1000 > Date.now();
+}
+
 
    getToken(): string | null {
     return localStorage.getItem('token');
