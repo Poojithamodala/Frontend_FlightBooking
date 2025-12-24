@@ -12,20 +12,45 @@
     </p>
 
 
-    <input type="text" placeholder="From" [(ngModel)]="flight.fromPlace" name="fromPlace" required
-      pattern="^[A-Za-z ]{2,30}$" #fromPlace="ngModel" [class.invalid]="fromPlace.invalid && fromPlace.touched" />
+    <select
+  [(ngModel)]="flight.fromPlace"
+  name="fromPlace"
+  required
+  #fromPlace="ngModel"
+  [class.invalid]="fromPlace.invalid && fromPlace.touched"
+>
+  <option value="" disabled selected>Select From Location</option>
+  <option *ngFor="let place of places" [value]="place">
+    {{ place }}
+  </option>
+</select>
 
-    <p class="field-error" *ngIf="fromPlace.invalid && fromPlace.touched">
-      From location is required
-    </p>
+<p class="field-error" *ngIf="fromPlace.invalid && fromPlace.touched">
+  From location is required
+</p>
 
 
-    <input type="text" placeholder="To" [(ngModel)]="flight.toPlace" name="toPlace" required pattern="^[A-Za-z ]{2,30}$"
-      #toPlace="ngModel" [class.invalid]="toPlace.invalid && toPlace.touched" />
 
-    <p class="field-error" *ngIf="toPlace.invalid && toPlace.touched">
-      To location is required
-    </p>
+    <select
+  [(ngModel)]="flight.toPlace"
+  name="toPlace"
+  required
+  #toPlace="ngModel"
+  [class.invalid]="toPlace.invalid && toPlace.touched"
+>
+  <option value="" disabled selected>Select To Location</option>
+  <option
+    *ngFor="let place of places"
+    [value]="place"
+    [disabled]="place === flight.fromPlace"
+  >
+    {{ place }}
+  </option>
+</select>
+
+<p class="field-error" *ngIf="toPlace.invalid && toPlace.touched">
+  To location is required
+</p>
 
 
     <input type="datetime-local" [(ngModel)]="flight.departureTime" name="departureTime" required [min]="minDateTime"

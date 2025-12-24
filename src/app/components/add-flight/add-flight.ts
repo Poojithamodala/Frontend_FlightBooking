@@ -11,6 +11,17 @@ import { FlightService } from '../../services/flight';
 })
 export class AddFlight {
 
+  places: string[] = [
+    'Hyderabad',
+    'Bangalore',
+    'Chennai',
+    'Delhi',
+    'Mumbai',
+    'Kolkata',
+    'Pune',
+    'Ahmedabad'
+  ];
+
   flight = {
     airline: '',
     fromPlace: '',
