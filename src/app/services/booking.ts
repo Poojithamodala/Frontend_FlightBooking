@@ -63,13 +63,13 @@ export class BookingService {
   cancelBooking(pnr: string) {
   const token = localStorage.getItem('token');
 
-  return this.http.put(
+  return this.http.delete(
     `${this.apiUrl}/booking/cancel/${pnr}`,
-    {},
     {
       headers: {
         Authorization: 'Bearer ' + token
-      }
+      },
+      responseType: 'text' as 'json' 
     }
   );
 }

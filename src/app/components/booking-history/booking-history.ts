@@ -15,8 +15,22 @@ export class BookingHistoryComponent {
   history: BookingHistoryDTO[] = [];
   loading = true;
   error: string | null = null;
+  cancellingPnr: string | null = null;
+  successMessage = '';
+  errorMessage = '';
+  showModal = false;
+  modalMessage = '';
 
-  constructor(private bookingService: BookingService, private cdr: ChangeDetectorRef) {}
+  openModal(message: string) {
+    this.modalMessage = message;
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  constructor(private bookingService: BookingService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.fetchHistory();
@@ -29,7 +43,8 @@ export class BookingHistoryComponent {
 
     this.bookingService.getBookingHistory().subscribe({
       next: data => {
-        this.history = data;
+        // this.history = data;
+        this.history = data.sort((a, b) => Number(a.canceled) - Number(b.canceled));
         this.loading = false;
         this.cdr.detectChanges();
       },
@@ -43,17 +58,31 @@ export class BookingHistoryComponent {
   }
 
   cancelBooking(pnr: string) {
-    if (!confirm(`Are you sure you want to cancel booking ${pnr}?`)) return;
+  if (!confirm(`Are you sure you want to cancel booking ${pnr}?`)) return;
 
-    this.bookingService.cancelBooking(pnr).subscribe({
-      next: () => {
-        alert('Booking cancelled successfully!');
-        this.fetchHistory(); // refresh list
-      },
-      error: err => {
-        alert('Failed to cancel booking');
-        console.error(err);
+  this.bookingService.cancelBooking(pnr).subscribe({
+    next: (res: any) => {
+      this.openModal(res || 'Booking cancelled successfully!');
+      this.fetchHistory();
+      this.cdr.detectChanges();
+    },
+    error: err => {
+      let msg = 'Failed to cancel booking';
+
+      if (typeof err.error === 'string') {
+        try {
+          const parsed = JSON.parse(err.error);
+          msg = parsed.message || msg;
+        } catch {
+          msg = err.error;
+        }
+      } else if (err?.error?.message) {
+        msg = err.error.message;
       }
-    });
-  }
+
+      this.openModal(msg);
+      this.cdr.detectChanges();
+    }
+  });
+}
 }
