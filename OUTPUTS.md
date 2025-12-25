@@ -78,7 +78,10 @@
 <h1>Validations with adding and removing passengers</h1>
 <img width="1911" height="876" alt="image" src="https://github.com/user-attachments/assets/e8a88266-cca8-4ba0-a161-278ae5903aa7" />
 <br><br>
+<h1>Same seat cannot be booked by same user</h1>
 <img width="1905" height="877" alt="image" src="https://github.com/user-attachments/assets/64f6ae8a-c7e5-4516-8b5a-e181b2e4edde" />
+<h1>Already booked seat cannot be</h1>
+<img width="1866" height="965" alt="image" src="https://github.com/user-attachments/assets/54466ad2-a0a6-40fd-9637-ef2162e05e20" />
 
 <h1>Booking confirmed</h1>
 <img width="1162" height="788" alt="image" src="https://github.com/user-attachments/assets/a4b77268-a61d-4804-9f27-0b4da427a86f" />
