@@ -22,3 +22,18 @@
     <a routerLink="/register">Register here</a>
   </p>
 </div>
+
+<!-- Password expiry -->
+<div class="modal-backdrop" *ngIf="showPasswordExpiredModal">
+  <div class="modal">
+    <h3>🔒 Password Expired</h3>
+    <p>
+      Your password has expired.<br />
+      You must change your password to continue.
+    </p>
+
+    <button (click)="goToChangePassword()">
+      Ok
+    </button>
+  </div>
+</div>

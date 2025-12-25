@@ -25,6 +25,12 @@ export class ChangePassword {
 
   constructor(private authService: AuthService, private router: Router, private cdr: ChangeDetectorRef) { }
 
+  ngOnInit() {
+    if (!this.authService.shouldForcePasswordChange()) {
+      this.router.navigate(['/login']);
+    }
+  }
+
   submit() {
     this.message = '';
     this.error = '';

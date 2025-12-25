@@ -33,21 +33,6 @@ export class AuthService {
     );
   }
 
-  // logout() {
-  //   const token = localStorage.getItem('token');
-
-  //   return this.http.post(
-  //     `${this.apiGateway}/logout`,
-  //     {},
-  //     {
-  //       headers: token
-  //         ? { Authorization: `Bearer ${token}` } : {},
-  //         responseType: 'text'
-  //     }
-  //   ).pipe(
-  //     tap(() => localStorage.removeItem('token'))
-  //   );
-  // }
   logout() {
   return this.http.post(
     `${this.apiGateway}/logout`,
@@ -63,22 +48,10 @@ export class AuthService {
   );
 }
 
-
-  // getProfile() {
-  //   const token = localStorage.getItem('token');
-
-  //   return this.http.get<User>(`${this.apiGateway}/profile`, {
-  //   headers: token ? { Authorization: `Bearer ${token}` } : {}
-  //   });
-  // }
   getProfile() {
   return this.http.get<User>(`${this.apiGateway}/profile`);
 }
 
-
-  // isLoggedIn(): boolean {
-  //   return !!localStorage.getItem('token');
-  // }
   isLoggedIn(): boolean {
   const token = localStorage.getItem('token');
   if (!token) return false;
@@ -116,6 +89,14 @@ export class AuthService {
         responseType: 'text'
     }
   );
+}
+
+shouldForcePasswordChange(): boolean {
+  const token = localStorage.getItem('token');
+  if (!token) return false;
+
+  const payload = JSON.parse(atob(token.split('.')[1]));
+  return payload.forcePasswordChange === true;
 }
 
 }

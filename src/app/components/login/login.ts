@@ -14,6 +14,7 @@ export class Login {
   credentials = { email: '', password: '' };
   message = '';
   loading = false;
+  showPasswordExpiredModal = false;
 
   constructor(private authService: AuthService, private router: Router, private cdr: ChangeDetectorRef) { }
 
@@ -48,7 +49,12 @@ export class Login {
     this.authService.login({ email, password }).subscribe({
       next: () => {
         this.loading = false;
-        this.router.navigate(['/search']);
+        // this.router.navigate(['/search']);
+        if (this.authService.shouldForcePasswordChange()) {
+          this.showPasswordExpiredModal = true;
+        } else {
+          this.router.navigate(['/search']);
+        }
         this.cdr.detectChanges();
       },
       error: (err) => {
@@ -63,4 +69,10 @@ export class Login {
       }
     });
   }
+
+  goToChangePassword() {
+  this.showPasswordExpiredModal = false;
+  this.router.navigate(['/change-password']);
+}
+
 }
