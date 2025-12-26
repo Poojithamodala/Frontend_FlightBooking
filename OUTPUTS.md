@@ -126,6 +126,18 @@
 <img width="1914" height="799" alt="image" src="https://github.com/user-attachments/assets/d920fe50-0172-4e88-9e4b-e1b4a58f3068" />
 <h1>Token will be cleared after logout</h1>
 <img width="1897" height="794" alt="image" src="https://github.com/user-attachments/assets/0e2e2b86-c5e1-48af-8192-32bd8f7f2307" />
+<br><br>
+
+<h1>Password change after x days</h1>
+<h1>Updated that user changed password before 90 days</h1>
+<img width="1445" height="256" alt="image" src="https://github.com/user-attachments/assets/701549f6-cff0-435f-9f74-f12eeb105010" />
+<h1>When user logs in, shows a pop up to change password</h1>
+<img width="1904" height="969" alt="image" src="https://github.com/user-attachments/assets/07b12576-b9e2-48fb-a098-c9f8a4e64cf9" />
+<h1>When clicked ok, it automatically redirects to change password page and the date is again updated automatically in databse.</h1>
+<img width="1489" height="277" alt="image" src="https://github.com/user-attachments/assets/1c6d07e1-db51-464d-afbc-705f775c411a" />
+
+
+
 
 
 
