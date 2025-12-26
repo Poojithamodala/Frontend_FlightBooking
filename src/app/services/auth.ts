@@ -99,4 +99,20 @@ shouldForcePasswordChange(): boolean {
   return payload.forcePasswordChange === true;
 }
 
+forgotPassword(email: string) {
+  return this.http.post(
+    `${this.apiGateway}/forgot-password`,
+    null,
+    { params: { email }, responseType: 'text' }
+  );
+}
+
+resetPassword(token: string, newPassword: string) {
+  return this.http.post(
+    `${this.apiGateway}/reset-password`,
+    null,
+    { params: { token, newPassword }, responseType: 'text' }
+  );
+}
+
 }

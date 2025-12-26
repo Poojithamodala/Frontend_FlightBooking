@@ -9,6 +9,8 @@ import { AllFlights } from './components/admin/all-flights/all-flights';
 import { BookingHistoryComponent } from './components/booking-history/booking-history';
 import { AddFlight } from './components/add-flight/add-flight';
 import { ChangePassword } from './components/change-password/change-password';
+import { ForgotPassword } from './components/forgot-password/forgot-password';
+import { ResetPassword } from './components/reset-password/reset-password';
 
 export const routes: Routes = [
   { path: '', component: App },
@@ -20,6 +22,7 @@ export const routes: Routes = [
   { path: 'admin/all-flights', component: AllFlights },
   { path: 'add-flight', component: AddFlight },
   { path: 'change-password', component: ChangePassword },
-  { path: 'booking-history', component: BookingHistoryComponent }
-
+  { path: 'booking-history', component: BookingHistoryComponent },
+  { path: 'forgot-password', component: ForgotPassword },
+  { path: 'reset-password', component: ResetPassword },
 ];
